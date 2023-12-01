@@ -23,11 +23,11 @@
                     }
                 }
             };
-            xhr.open('GET', 'http://targetapp/api/v1/user', true); // Replace with the target endpoint
-            xhr.setRequestHeader('Accept', 'application/json'); // Expecting JSON data
+            xhr.open('GET', 'https://ginandjuice.shop/catalog/product?productId=2', true); // Replace with the target endpoint
+            // xhr.setRequestHeader('Accept', 'application/json'); // Expecting JSON data
             // can include more headers here, if that request requires some necessary headers for the request to be successfull, for eg..
-            xhr.setRequestHeader('authtoken', 'your_auth_token_here'); // Set your authorization token here
-            xhr.setRequestHeader('apikey', 'your_api_key_here'); // Set your API key here
+            // xhr.setRequestHeader('authtoken', 'your_auth_token_here'); // Set your authorization token here
+            // xhr.setRequestHeader('apikey', 'your_api_key_here'); // Set your API key here
             xhr.withCredentials = true; // Include credentials in the request
             xhr.send();
         }
